@@ -1,0 +1,5 @@
+CLASS zbp_i_confcatalog DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_conf_catalog.
+ENDCLASS.
+
+CLASS zbp_i_confcatalog IMPLEMENTATION.
+ENDCLASS.

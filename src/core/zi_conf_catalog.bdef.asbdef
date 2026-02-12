@@ -1,0 +1,62 @@
+managed implementation in class zbp_i_confcatalog unique;
+strict ( 2 );
+
+define behavior for ZI_CONF_CATALOG alias Catalog
+persistent table zconfcatalog
+lock master
+authorization master ( instance )
+// etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  association _FieldDef { create; }
+
+  // User must enter ConfId, cannot change it after creation
+  field ( mandatory : create, readonly : update ) ConfId;
+
+  // Read-only Admin Data
+  field ( readonly ) CreatedBy, CreatedAt, ChangedBy, ChangedAt;
+
+  // Validations
+  validation validateModuleId on save { field ModuleId; create; }
+  validation validateTargetTable on save { field TargetTable; create; }
+
+  mapping for zconfcatalog
+  {
+    ConfId = conf_id;
+    ModuleId = module_id;
+    ConfName = conf_name;
+    ConfType = conf_type;
+    Description = description;
+    TargetTable = target_table;
+    IsActive = is_active;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    ChangedBy = changed_by;
+    ChangedAt = changed_at;
+  }
+}
+
+define behavior for ZI_CONF_FIELD_DEF alias FieldDef
+persistent table zconffielddef
+lock dependent by _Catalog
+authorization dependent by _Catalog
+// etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) ConfId;
+  association _Catalog;
+
+  mapping for zconffielddef
+  {
+    ConfId = conf_id;
+    FieldName = field_name;
+    FieldLabel = field_label;
+    DataType = data_type;
+    IsRequired = is_required;
+    ValueHelpType = value_help_type;
+    ConfType = conf_type;
+  }
+}
