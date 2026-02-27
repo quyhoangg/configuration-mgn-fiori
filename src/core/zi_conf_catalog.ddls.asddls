@@ -10,9 +10,9 @@ define root view entity ZI_CONF_CATALOG
       conf_name    as ConfName,
       conf_type    as ConfType,
       description  as Description,
-      target_table as TargetTable,
+      target_cds   as TargetCds,
       is_active    as IsActive,
-      
+
       /* Admin Data */
       @Semantics.user.createdBy: true
       created_by   as CreatedBy,

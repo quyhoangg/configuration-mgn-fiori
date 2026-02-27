@@ -12,7 +12,6 @@ define view entity ZI_CONF_FIELD_DEF
       data_type       as DataType,
       is_required     as IsRequired,
       value_help_type as ValueHelpType,
-      conf_type       as ConfType,
 
       /* Associations */
       _Catalog

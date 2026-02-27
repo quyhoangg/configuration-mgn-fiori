@@ -1,0 +1,96 @@
+managed implementation in class zbp_ir_conf_req_h unique;
+strict ( 2 );
+
+define behavior for ZIR_CONF_REQ_H alias Req
+persistent table zconfreqh
+lock master
+authorization master ( instance )
+etag master ChangedAt
+{
+  create;
+  update;
+  delete;
+
+  association _Items { create; }
+
+  // UUID generated
+  field ( numbering: managed, readonly ) ReqId;
+
+  // System/admin fields readonly
+  field ( readonly )
+    CreatedBy, CreatedAt,
+    ChangedBy, ChangedAt,
+    ApprovedBy, ApprovedAt,
+    RejectedBy, RejectedAt;
+
+  // Nếu status chỉ đổi bằng action
+  field ( readonly ) Status;
+
+  action submit  result [1] $self;
+  action approve result [1] $self;
+  action reject  result [1] $self;
+
+  validation validate_before_save on save { create; update; }
+  determination set_default_and_admin_fields on modify { create; update; }
+
+  mapping for zconfreqh
+  {
+    ReqId      = req_id;
+    EnvId      = env_id;
+    ModuleId   = module_id;
+    ReqTitle   = req_title;
+    Description= description;
+    Status     = status;
+    Reason     = reason;
+
+    CreatedBy  = created_by;
+    CreatedAt  = created_at;
+    ChangedBy  = changed_by;
+    ChangedAt  = changed_at;
+
+    ApprovedBy = approved_by;
+    ApprovedAt = approved_at;
+    RejectedBy = rejected_by;
+    RejectedAt = rejected_at;
+  }
+}
+
+define behavior for ZI_CONF_REQ_I alias Item
+persistent table zconfreqi
+lock dependent by _Header
+authorization dependent by _Header
+etag master ChangedAt
+{
+  update;
+  delete;
+
+  // UUID generated
+  field ( numbering: managed, readonly ) ReqItemId;
+
+  // FK theo composition: framework set khi create item, user không được sửa sau đó
+  field ( readonly:update ) ReqId;
+
+  field ( readonly )
+    CreatedBy, CreatedAt,
+    ChangedBy, ChangedAt;
+
+  association _Header;
+
+  validation validate_item on save { create; update; }
+
+  mapping for zconfreqi
+  {
+    ReqItemId  = req_item_id;
+    ReqId      = req_id;
+    ConfId     = conf_id;
+    Action     = action;
+    TargetEnvId= target_env_id;
+    Notes      = notes;
+    VersionNo  = version_no;
+
+    CreatedBy  = created_by;
+    CreatedAt  = created_at;
+    ChangedBy  = changed_by;
+    ChangedAt  = changed_at;
+  }
+}

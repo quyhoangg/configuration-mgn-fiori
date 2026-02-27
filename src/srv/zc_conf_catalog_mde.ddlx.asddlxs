@@ -1,0 +1,62 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: {
+    typeName: 'Configuration',
+    typeNamePlural: 'Configurations',
+    title: { type: #STANDARD, label: 'Configuration', value: 'ConfName' },
+    description: { type: #STANDARD, label: 'Module', value: 'ModuleId' }
+  }
+}
+
+annotate entity ZC_CONF_CATALOG with
+{
+  @UI.facet: [
+    { id: 'GeneralInfo',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'General Information',
+      position: 10 },
+
+    { id: 'FieldDefinitions',
+      purpose: #STANDARD,
+      type: #LINEITEM_REFERENCE,
+      label: 'Field Definitions',
+      position: 20,
+      targetElement: '_FieldDef' }
+  ]
+
+  @UI: { lineItem: [{ position: 10, importance: #HIGH, label: 'UUID' }],
+         identification: [{ position: 10, label: 'UUID' }] }
+  ConfId;
+
+  @UI: { lineItem: [{ position: 20, importance: #HIGH, label: 'Module' }],
+         identification: [{ position: 20, label: 'Module' }],
+         selectionField: [{ position: 10 }] }
+  ModuleId;
+
+  @UI: { lineItem: [{ position: 30, importance: #HIGH, label: 'Configuration Name' }],
+         identification: [{ position: 30, label: 'Configuration Name' }] }
+  ConfName;
+
+  @UI: { lineItem: [{ position: 40, label: 'Configuration Type' }],
+         identification: [{ position: 40, label: 'Configuration Type' }],
+         selectionField: [{ position: 20 }] }
+  ConfType;
+
+  @UI: { identification: [{ position: 50, label: 'Description' }] }
+  Description;
+
+  @UI: { identification: [{ position: 60, label: 'Target CDS' }] }
+  TargetCds;
+
+  @UI: { lineItem: [{ position: 50, importance: #HIGH, label: 'Active' }],
+         identification: [{ position: 70, label: 'Active' }] }
+  IsActive;
+
+  @UI: { identification: [{ position: 80, label: 'Created By' }] }
+  CreatedBy;
+
+  @UI: { identification: [{ position: 90, label: 'Created At' }] }
+  CreatedAt;
+}

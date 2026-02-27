@@ -1,0 +1,5 @@
+CLASS zbp_i_sd_price_conf DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_sd_price_conf.
+ENDCLASS.
+
+CLASS zbp_i_sd_price_conf IMPLEMENTATION.
+ENDCLASS.

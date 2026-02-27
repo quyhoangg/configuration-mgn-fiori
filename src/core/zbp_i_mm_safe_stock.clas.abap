@@ -1,0 +1,5 @@
+CLASS zbp_i_mm_safe_stock DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_mm_safe_stock.
+ENDCLASS.
+
+CLASS zbp_i_mm_safe_stock IMPLEMENTATION.
+ENDCLASS.

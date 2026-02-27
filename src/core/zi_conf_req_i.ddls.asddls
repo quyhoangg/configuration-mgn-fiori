@@ -23,7 +23,6 @@ define view entity ZI_CONF_REQ_I
       target_env_id as TargetEnvId,
       notes         as Notes,
       version_no    as VersionNo,
-      target_table  as TargetTable,
 
       @Semantics.user.createdBy: true
       created_by    as CreatedBy,

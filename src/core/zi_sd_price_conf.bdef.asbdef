@@ -1,0 +1,41 @@
+managed implementation in class ZBP_I_SD_PRICE_CONF unique;
+strict ( 2 );
+
+define behavior for ZI_SD_PRICE_CONF alias PriceConf
+persistent table zsd_price_conf
+lock master
+authorization master ( instance )
+etag master ChangedAt
+{
+  field ( readonly ) ItemId, CreatedBy, CreatedAt, ChangedBy, ChangedAt;
+  field ( mandatory ) EnvId, BranchId, CustGroup;
+
+  create;
+  update;
+  delete;
+
+  determination setAdminFields on modify { create; update; }
+  validation validateMandatory on save { create; update; }
+  validation validateDates on save { create; update; }
+
+  mapping for zsd_price_conf
+  {
+    ItemId      = item_id;
+    ReqId       = req_id;
+    BranchId    = branch_id;
+    EnvId       = env_id;
+    CustGroup   = cust_group;
+    MaterialGrp = material_grp;
+    MaxDiscount = max_discount;
+    MinOrderVal = min_order_val;
+    ApproverGrp = approver_grp;
+    Currency    = currency;
+    ValidFrom   = valid_from;
+    ValidTo     = valid_to;
+    VersionNo   = version_no;
+    CreatedBy   = created_by;
+    CreatedAt   = created_at;
+    ChangedBy   = changed_by;
+    ChangedAt   = changed_at;
+  }
+}

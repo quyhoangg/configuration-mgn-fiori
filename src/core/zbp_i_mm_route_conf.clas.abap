@@ -1,0 +1,5 @@
+CLASS zbp_i_mm_route_conf DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_mm_route_conf.
+ENDCLASS.
+
+CLASS zbp_i_mm_route_conf IMPLEMENTATION.
+ENDCLASS.

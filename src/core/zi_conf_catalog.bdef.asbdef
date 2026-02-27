@@ -20,7 +20,7 @@ authorization master ( instance )
 
   // Validations
   validation validateModuleId on save { field ModuleId; create; }
-  validation validateTargetTable on save { field TargetTable; create; }
+  validation validateTargetTable on save { field TargetCds; create; }
 
   mapping for zconfcatalog
   {
@@ -29,7 +29,7 @@ authorization master ( instance )
     ConfName = conf_name;
     ConfType = conf_type;
     Description = description;
-    TargetTable = target_table;
+    TargetCds = target_Cds;
     IsActive = is_active;
     CreatedBy = created_by;
     CreatedAt = created_at;
@@ -57,6 +57,5 @@ authorization dependent by _Catalog
     DataType = data_type;
     IsRequired = is_required;
     ValueHelpType = value_help_type;
-    ConfType = conf_type;
   }
 }

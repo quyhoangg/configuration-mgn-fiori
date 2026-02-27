@@ -13,6 +13,6 @@ define view entity ZI_ENV_DEF
   key env_id      as EnvId,
 
       description as Description,
-      next_sys    as NextSys,
+      next_env    as NextEnv,
       is_active   as IsActive
 }
